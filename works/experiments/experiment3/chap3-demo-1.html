@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>实验四 - 二维图形几何变换</title>
+
+  <!-- 顶点着色器 -->
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    #version 300 es
+    in vec2 vPosition;
+    uniform mat4 uTransform;
+    void main() {
+      gl_Position = uTransform * vec4(vPosition, 0.0, 1.0);
+    }
+  </script>
+
+  <!-- 片段着色器 -->
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    out vec4 fColor;
+    void main() {
+      fColor = vec4(0.2, 0.4, 0.8, 1.0);
+    }
+  </script>
+
+  <!-- 库文件路径（保持与experiment2一致） -->
+  <script src="../../lib/webgl-utils.js"></script>
+  <script src="../../lib/initShaders.js"></script>
+  <script src="../../lib/gl-matrix-min.js"></script>
+  <script src="chap3-demo-1.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; background: #f6f6f6; text-align: center; margin-top: 20px; }
+    canvas { border: 1px solid #ccc; background: white; margin-top: 10px; }
+    .controls { margin-top: 10px; }
+    label, select, input, button { margin: 5px; }
+  </style>
+</head>
+
+<body>
+  <h2>实验四 - 二维图形几何变换</h2>
+
+  <div class="controls">
+    <label>选择变换：</label>
+    <select id="transformType">
+      <option value="translate">平移</option>
+      <option value="rotate">旋转</option>
+      <option value="scale">缩放</option>
+    </select>
+
+    <div id="translateControls">
+      <label>ΔX:</label><input id="tx" type="number" step="0.1" value="0.0">
+      <label>ΔY:</label><input id="ty" type="number" step="0.1" value="0.0">
+    </div>
+
+    <div id="rotateControls" style="display:none;">
+      <label>角度 (°):</label><input id="theta" type="number" step="5" value="0">
+    </div>
+
+    <div id="scaleControls" style="display:none;">
+      <label>Sx:</label><input id="sx" type="number" step="0.1" value="1.0">
+      <label>Sy:</label><input id="sy" type="number" step="0.1" value="1.0">
+    </div>
+
+    <button id="applyButton">应用变换</button>
+    <button id="resetButton">重置</button>
+  </div>
+
+  <canvas id="gl-canvas" width="600" height="600">你的浏览器不支持HTML5 Canvas</canvas>
+</body>
+</html>

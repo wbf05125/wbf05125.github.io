@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实验一：Sierpinski Gasket的绘制</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>实验2-1：Sierpinski Gasket的绘制</h1>
+  <label for="level">输入剖分层次(0-7)：</label>
+  <input type="number" id="level" min="0" max="7" value="1">
+  <button id="drawBtn">绘制</button>
+  <canvas id="glCanvas" width="400" height="400"></canvas>
+
+  <!-- 顶点着色器 -->
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+    void main() {
+      gl_Position = vPosition;
+      gl_PointSize = 1.0;
+    }
+  </script>
+
+  <!-- 片元着色器 -->
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 u_FragColor;
+    void main() {
+      gl_FragColor = u_FragColor;
+    }
+  </script>
+
+  <!-- 修正库文件路径 -->
+  <script src="../../lib/glMatrix-0.9.5.min.js"></script>
+  <script src="../../lib/initShaders.js"></script>
+  <script src="../../lib/webgl-utils.js"></script>
+  <script src="chap2-demo-1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>实验三 - 三维 Sierpinski Gasket</title>
+
+  <!-- WebGL2 着色器 -->
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    #version 300 es
+    in vec3 vPosition;
+    in vec4 aColor;
+    out vec4 vColor;
+
+    void main() {
+      gl_Position = vec4(vPosition, 1.0);
+      vColor = aColor;
+    }
+  </script>
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    in vec4 vColor;
+    out vec4 fColor;
+    void main() {
+      fColor = vColor;
+    }
+  </script>
+
+  <!-- 引用你项目已有的库文件（相对路径保持不变） -->
+  <script src="../../lib/webgl-utils.js"></script>
+  <script src="../../lib/initShaders.js"></script>
+  <script src="../../lib/gl-matrix-min.js"></script>
+
+  <!-- 引用 JS 主程序 -->
+  <script src="chap2-demo-2.js"></script>
+</head>
+
+<body>
+  <h2>实验三 - 三维 Sierpinski Gasket</h2>
+  <label>剖分层次 (0–7): </label>
+  <input id="numSubdivisions" type="number" min="0" max="7" value="2">
+  <button id="drawButton">绘制</button>
+  <br><br>
+  <canvas id="gl-canvas" width="512" height="512">
+    你的浏览器不支持HTML5 Canvas
+  </canvas>
+</body>
+</html>
