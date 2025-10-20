@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>实验四：二维与三维变换 (2)</title>
-  <link rel="stylesheet" href="../../assets/style.css">
-  <style>
-    body { background: #1e1e1e; color: #ddd; font-family: "Segoe UI"; text-align: center; }
-    #controls { margin: 10px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    button, input[type=color], input[type=range] {
-      padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer;
-    }
-    canvas { border: 1px solid #555; margin-top: 10px; background: #000; }
-  </style>
+    <title>实验四 变换(2) - 任务 2.2</title>
+    <style>
+        body { font-family: sans-serif; }
+        canvas { border: 1px solid black; }
+        .controls { margin-top: 10px; }
+        .control-group { margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; }
+    </style>
 </head>
 <body>
-  <h2>实验四：二维与三维图形变换与交互控制</h2>
 
-  <div id="controls">
-    <button id="triangleBtn">正三角形</button>
-    <button id="squareBtn">正方形</button>
-    <button id="cubeBtn">立方体</button>
-    <button id="circleBtn">圆</button>
-    <label>颜色选择：
-      <input type="color" id="colorPicker" value="#00ccff">
-    </label>
-    <label>圆边数：
-      <input type="range" id="circleSides" min="3" max="100" value="36">
-    </label>
-    <button id="clearBtn">清空场景</button>
-  </div>
+<h1>实验四：变换(2) - 任务 2.2</h1>
 
-  <canvas id="gl-canvas" width="900" height="600"></canvas>
+<div class="controls">
+    <div class="control-group">
+        <h3>绘制对象选择</h3>
+        <button id="selectTriangle">正三角形</button>
+        <button id="selectSquare">正方形</button>
+        <button id="selectCube">立方体</button>
+        <button id="selectCircle">圆</button>
+    </div>
 
-  <script id="vertex-shader" type="x-shader/x-vertex">
-  attribute vec4 aPosition;
-  uniform mat4 uModelMatrix;
-  void main() {
-    gl_Position = uModelMatrix * aPosition;
-  }
-  </script>
+    <div class="control-group">
+        <h3>控制</h3>
+        <label for="colorPicker">选择颜色:</label>
+        <input type="color" id="colorPicker" value="#ff0000"><br><br>
 
-  <script id="fragment-shader" type="x-shader/x-fragment">
-  precision mediump float;
-  uniform vec3 uColor;
-  void main() {
-    gl_FragColor = vec4(uColor, 1.0);
-  }
-  </script>
+        <label for="circleSegments">圆的边数: <span id="segmentsValue">30</span></label>
+        <input type="range" id="circleSegments" min="3" max="100" value="30"><br><br>
 
-  <!-- 引入 WebGL 工具库 -->
-  <script src="../../lib/gl-matrix.js"></script>
-  <script src="../../lib/webgl-utils.js"></script>
-  <script src="../../lib/initShaders.js"></script>
-  
+        <button id="clearScene">清空场景</button>
+    </div>
+</div>
 
-  <!-- 逻辑脚本 -->
-  <script src="chap4-objects.js"></script>
-  <script src="chap4-scene.js"></script>
+<canvas id="glCanvas" width="600" height="600"></canvas>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 a_Position;
+    attribute vec4 a_Color;
+
+    uniform mat4 u_ModelViewMatrix;
+    uniform mat4 u_ProjectionMatrix;
+
+    varying vec4 v_Color;
+
+    void main() {
+        gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * a_Position;
+        v_Color = a_Color;
+    }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    varying vec4 v_Color;
+
+    void main() {
+        gl_FragColor = v_Color;
+    }
+</script>
+
+<script src="../../lib/webgl-utils.js"></script>
+<script src="../../lib/initShaders.js"></script>
+<script src="../../lib/gl-matrix.js"></script>
+
+<script src="chap4-objects.js"></script>
+<script src="chap4-scene.js"></script>
+
 </body>
 </html>
