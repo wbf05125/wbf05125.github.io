@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>实验四：二维与三维变换 (2)</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    body { background: #1e1e1e; color: #ddd; font-family: "Segoe UI"; text-align: center; }
+    #controls { margin: 10px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    button, input[type=color], input[type=range] {
+      padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer;
+    }
+    canvas { border: 1px solid #555; margin-top: 10px; background: #000; }
+  </style>
+</head>
+<body>
+  <h2>实验四：二维与三维图形变换与交互控制</h2>
+
+  <div id="controls">
+    <button id="triangleBtn">正三角形</button>
+    <button id="squareBtn">正方形</button>
+    <button id="cubeBtn">立方体</button>
+    <button id="circleBtn">圆</button>
+    <label>颜色选择：
+      <input type="color" id="colorPicker" value="#00ccff">
+    </label>
+    <label>圆边数：
+      <input type="range" id="circleSides" min="3" max="100" value="36">
+    </label>
+    <button id="clearBtn">清空场景</button>
+  </div>
+
+  <canvas id="gl-canvas" width="900" height="600"></canvas>
+
+  <script id="vertex-shader" type="x-shader/x-vertex">
+  attribute vec4 aPosition;
+  uniform mat4 uModelMatrix;
+  void main() {
+    gl_Position = uModelMatrix * aPosition;
+  }
+  </script>
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+  precision mediump float;
+  uniform vec3 uColor;
+  void main() {
+    gl_FragColor = vec4(uColor, 1.0);
+  }
+  </script>
+
+  <!-- 引入 WebGL 工具库 -->
+  <script src="../../lib/gl-matrix.js"></script>
+  <script src="../../lib/webgl-utils.js"></script>
+  <script src="../../lib/initShaders.js"></script>
+  
+
+  <!-- 逻辑脚本 -->
+  <script src="chap4-objects.js"></script>
+  <script src="chap4-scene.js"></script>
+</body>
+</html>

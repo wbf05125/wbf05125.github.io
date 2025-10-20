@@ -46,10 +46,10 @@ window.onload = function init(){
 
 	render();
 }
-
+3
 function render(){
 	gl.clear( gl.COLOR_BUFFER_BIT );
-	//gl.drawArrays( gl.TRIANGLE_FAN, 0, 4 );
+ 	//gl.drawArrays( gl.TRIANGLE_FAN, 0, 4 );
 	gl.drawArrays( gl.TRIANGLES, 0, 3 );
 	//gl.drawArrays( gl.TRIANGLE_FANS, 3, 6 );
 }

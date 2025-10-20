@@ -1,0 +1,73 @@
+/* 页面整体样式 */
+body {
+    font-family: 'Segoe UI', 'PingFang SC', Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    color: #333;
+}
+
+/* 头部样式 */
+header {
+    background: linear-gradient(90deg, #4f8cff 0%, #70e1f5 100%);
+    color: white;
+    padding: 2rem 1rem 1rem 1rem;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.1);
+}
+
+header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+}
+
+header p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* 导航栏样式 */
+nav {
+    margin: 2rem auto;
+    max-width: 600px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(79,140,255,0.08);
+    padding: 1.5rem 2rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    margin-bottom: 1.2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4f8cff;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+nav a:hover {
+    background: #eaf4ff;
+    color: #2563eb;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: #888;
+    font-size: 0.95rem;
+    margin-top: 3rem;
+}
